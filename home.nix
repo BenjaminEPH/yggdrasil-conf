@@ -9,6 +9,20 @@
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/yggdrasil-conf#Yggdrasil";
     };
+    plugins = [
+      {
+        name = "tide";
+        src = pkgs.fishPlugins.tide.src;
+      }
+      {
+        name = "autopair";
+        src = pkgs.fishPlugins.autopair.src;
+      }
+      {
+        name = "grc";
+        src = pkgs.fishPlugins.grc.src;
+      }
+    ];
   };
   home.packages = with pkgs; [
     nil
@@ -16,6 +30,7 @@
     alacritty
     zoxide
     tmux
+    grc
   ];
   programs.git = {
     enable = true;
