@@ -131,7 +131,24 @@
 
     # Wallpapers
     linux-wallpaperengine
+
+    # Sway for dev
+    swaylock
+    swayidle
+    swaybg
+    rofi
+    swappy
+    brightnessctl
+    playerctl
+    xdg-desktop-portal-wlr
+
   ];
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
+
   fonts.fontconfig.defaultFonts = {
     monospace = [ "JetBrainsMono Nerd Font" ];
     sansSerif = [ "JetBrainsMono Nerd Font" ];
