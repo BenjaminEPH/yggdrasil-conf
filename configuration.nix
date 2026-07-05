@@ -114,10 +114,15 @@
     nodejs
     pnpm
     python3
-    rustup
+    rustc
+    cargo
+    rustfmt
+    clippy
+    rust-analyzer
     go
     lua5_1
     lua51Packages.luarocks
+    lua51Packages.lua-lsp
 
     # dev tools
     pkg-config
@@ -138,6 +143,8 @@
     swaybg
     rofi
     swappy
+    grim
+    slurp
     brightnessctl
     playerctl
     xdg-desktop-portal-wlr
@@ -147,6 +154,7 @@
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
+    extraOptions = [ "--unsupported-gpu" ];
   };
 
   fonts.fontconfig.defaultFonts = {
