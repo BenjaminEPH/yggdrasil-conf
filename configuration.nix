@@ -41,7 +41,11 @@
   services.xserver.enable = false;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-mocha-mauve";
+  };
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
@@ -149,6 +153,14 @@
     playerctl
     xdg-desktop-portal-wlr
 
+    #themes
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      accent = "mauve";
+      font = "JetBrainsMono Nerd Font";
+      fontSize = "12";
+      loginBackground = true;
+    })
   ];
 
   programs.sway = {
