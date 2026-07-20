@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   home.username = "ben";
@@ -24,14 +29,19 @@
       }
     ];
   };
-  home.packages = with pkgs; [
-    nil
-    nixpkgs-fmt
-    alacritty
-    zoxide
-    tmux
-    grc
-  ];
+  home.packages =
+    with pkgs;
+    [
+      nil
+      nixpkgs-fmt
+      alacritty
+      zoxide
+      tmux
+      grc
+    ]
+    ++ [
+      inputs.nvim-config.packages.x86_64-linux-default
+    ];
   programs.git = {
     enable = true;
     settings = {

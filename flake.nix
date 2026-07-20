@@ -11,6 +11,10 @@
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvim-config = {
+      url = "path:./nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    }
   };
 
   outputs =
@@ -31,7 +35,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.ben = import ./home.nix;
+              users.ben = import ./home.nix { inherit inputs; };
               backupFileExtension = "backup";
             };
           }
