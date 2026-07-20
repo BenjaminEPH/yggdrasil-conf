@@ -40,7 +40,7 @@
       grc
     ]
     ++ [
-      inputs.nvim-config.packages.x86_64-linux-default
+      inputs.nvim-config.packages.x86_64-linux.default
     ];
   programs.git = {
     enable = true;

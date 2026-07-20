@@ -14,7 +14,7 @@
     nvim-config = {
       url = "path:./nvim";
       inputs.nixpkgs.follows = "nixpkgs";
-    }
+    };
   };
 
   outputs =
@@ -35,7 +35,8 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.ben = import ./home.nix { inherit inputs; };
+              extraSpecialArgs = { inherit inputs; };
+              users.ben = import ./home.nix;
               backupFileExtension = "backup";
             };
           }
