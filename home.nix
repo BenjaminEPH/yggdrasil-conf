@@ -38,6 +38,7 @@
       zoxide
       tmux
       grc
+      uv
     ]
     ++ [
       inputs.nvim-config.packages.x86_64-linux.default
