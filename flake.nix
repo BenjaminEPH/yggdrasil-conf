@@ -15,6 +15,7 @@
       url = "path:./nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   outputs =
