@@ -213,4 +213,9 @@
   ];
 
   system.stateVersion = "26.05"; # Did you read the comment?
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 }
