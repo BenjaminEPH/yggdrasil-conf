@@ -88,7 +88,7 @@
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     neovim
     kitty
@@ -150,6 +150,31 @@
     # Shell
     quickshell
     dms-shell
+
+    # Wayland
+    wayland
+    wayland-protocols
+
+    # X11
+    xorg.libX11
+    xorg.libxcb
+    xorg.libXcursor
+    xorg.libXi
+    xorg.libXrandr
+
+    # Keyboard
+    libxkbcommon
+
+    # Vulkan
+    vulkan-loader
+    vulkan-headers
+
+    # Fonts
+    fontconfig
+    freetype
+
+    # Graphics
+    mesa
 
     #themes
     (pkgs.catppuccin-sddm.override {
