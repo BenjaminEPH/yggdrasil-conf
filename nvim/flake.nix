@@ -1,22 +1,6 @@
 # Copyright (c) 2023 BirdeeHub
 # Licensed under the MIT license
 
-# This is an empty nixCats config.
-# you may import this template directly into your nvim folder
-# and then add plugins to categories here,
-# and call the plugins with their default functions
-# within your lua, rather than through the nvim package manager's method.
-# Use the help, and the example config github:BirdeeHub/nixCats-nvim?dir=templates/example
-
-# It allows for easy adoption of nix,
-# while still providing all the extra nix features immediately.
-# Configure in lua, check for a few categories, set a few settings,
-# output packages with combinations of those categories and settings.
-
-# All the same options you make here will be automatically exported in a form available
-# in home manager and in nixosModules, as well as from other flakes.
-# each section is tagged with its relevant help section.
-
 {
   description = "My nvim conf using nixCats";
 
@@ -52,22 +36,9 @@
       inherit (nixCats) utils;
       luaPath = ./.;
       forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
-      # the following extra_pkg_config contains any values
-      # which you want to pass to the config set of nixpkgs
-      # import nixpkgs { config = extra_pkg_config; inherit system; }
-      # will not apply to module imports
-      # as that will have your system values
       extra_pkg_config = {
         # allowUnfree = true;
       };
-      # management of the system variable is one of the harder parts of using flakes.
-
-      # so I have done it here in an interesting way to keep it out of the way.
-      # It gets resolved within the builder itself, and then passed to your
-      # categoryDefinitions and packageDefinitions.
-
-      # this allows you to use ${pkgs.stdenv.hostPlatform.system} whenever you want in those sections
-      # without fear.
 
       dependencyOverlays = # (import ./overlays inputs) ++
         [
@@ -100,11 +71,6 @@
           ...
         }@packageDef:
         {
-          # to define and use a new category, simply add a new list to a set here,
-          # and later, you will include categoryname = true; in the set you
-          # provide when you build the package using this builder function.
-          # see :help nixCats.flake.outputs.packageDefinitions for info on that section.
-
           # lspsAndRuntimeDeps:
           # this section is for dependencies that should be available
           # at RUN TIME for plugins. Will be available to PATH within neovim terminal
@@ -166,6 +132,7 @@
               todo-comments-nvim
               mini-nvim
               nvim-treesitter.withAllGrammars
+              bufferline-nvim
               # This is for if you only want some of the grammars
               # (nvim-treesitter.withPlugins (
               #   plugins: with plugins; [
@@ -259,54 +226,56 @@
       packageDefinitions = {
         # These are the names of your packages
         # you can include as many as you wish.
-        nvim = { pkgs, name, ... }: {
-          # they contain a settings set defined above
-          # see :help nixCats.flake.outputs.settings
-          settings = {
-            suffix-path = true;
-            suffix-LD = true;
-            wrapRc = true;
-            # IMPORTANT:
-            # your alias may not conflict with your other packages.
-            aliases = [ "vim" ];
-            # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
-            hosts.python3.enable = true;
-            hosts.node.enable = true;
-          };
-          # and a set of categories that you want
-          # (and other information to pass to lua)
-          categories = {
-            general = true;
-            gitPlugins = true;
-            customPlugins = true;
-            test = true;
+        nvim =
+          { pkgs, name, ... }:
+          {
+            # they contain a settings set defined above
+            # see :help nixCats.flake.outputs.settings
+            settings = {
+              suffix-path = true;
+              suffix-LD = true;
+              wrapRc = true;
+              # IMPORTANT:
+              # your alias may not conflict with your other packages.
+              aliases = [ "vim" ];
+              # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
+              hosts.python3.enable = true;
+              hosts.node.enable = true;
+            };
+            # and a set of categories that you want
+            # (and other information to pass to lua)
+            categories = {
+              general = true;
+              gitPlugins = true;
+              customPlugins = true;
+              test = true;
 
-            kickstart-autopairs = true;
-            kickstart-neo-tree = true;
-            kickstart-debug = true;
-            kickstart-lint = true;
-            kickstart-indent_line = true;
+              kickstart-autopairs = true;
+              kickstart-neo-tree = true;
+              kickstart-debug = true;
+              kickstart-lint = true;
+              kickstart-indent_line = true;
 
-            # this kickstart extra didnt require any extra plugins
-            # so it doesnt have a category above.
-            # but we can still send the info from nix to lua that we want it!
-            kickstart-gitsigns = true;
+              # this kickstart extra didnt require any extra plugins
+              # so it doesnt have a category above.
+              # but we can still send the info from nix to lua that we want it!
+              kickstart-gitsigns = true;
 
-            # we can pass whatever we want actually.
-            have_nerd_font = false;
+              # we can pass whatever we want actually.
+              have_nerd_font = false;
 
-            example = {
-              youCan = "add more than just booleans";
-              toThisSet = [
-                "and the contents of this categories set"
-                "will be accessible to your lua with"
-                "nixCats('path.to.value')"
-                "see :help nixCats"
-                "and type :NixCats to see the categories set in nvim"
-              ];
+              example = {
+                youCan = "add more than just booleans";
+                toThisSet = [
+                  "and the contents of this categories set"
+                  "will be accessible to your lua with"
+                  "nixCats('path.to.value')"
+                  "see :help nixCats"
+                  "and type :NixCats to see the categories set in nvim"
+                ];
+              };
             };
           };
-        };
       };
       # In this section, the main thing you will need to do is change the default package name
       # to the name of the packageDefinitions entry you wish to use as the default.
