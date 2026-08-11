@@ -4,18 +4,21 @@ return {
   version = '*',
   dependencies = 'nvim-tree/nvim-web-devicons',
   event = 'VeryLazy',
-  opts = {
-    options = {
-      mode = 'buffers', -- 'buffers' = un tab por buffer abierto (lo que buscas)
-      diagnostics = 'nvim_lsp',
-      offsets = {
-        {
-          filetype = 'neo-tree',
-          text = 'File Explorer',
-          highlight = 'Directory',
-          text_align = 'left',
+  config = function()
+    vim.opt.showtabline = 2
+    require('bufferline').setup {
+      options = {
+        mode = 'buffers',
+        diagnostics = 'nvim_lsp',
+        offsets = {
+          {
+            filetype = 'neo-tree',
+            text = 'File Explorer',
+            highlight = 'Directory',
+            text_align = 'left',
+          },
         },
       },
-    },
-  },
+    }
+  end,
 }

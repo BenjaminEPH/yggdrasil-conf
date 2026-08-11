@@ -151,31 +151,6 @@
     quickshell
     dms-shell
 
-    # Wayland
-    wayland
-    wayland-protocols
-
-    # X11
-    xorg.libX11
-    xorg.libxcb
-    xorg.libXcursor
-    xorg.libXi
-    xorg.libXrandr
-
-    # Keyboard
-    libxkbcommon
-
-    # Vulkan
-    vulkan-loader
-    vulkan-headers
-
-    # Fonts
-    fontconfig
-    freetype
-
-    # Graphics
-    mesa
-
     #themes
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
