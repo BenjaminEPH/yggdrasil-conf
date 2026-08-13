@@ -151,6 +151,9 @@
     quickshell
     dms-shell
 
+    # Music
+    spotify
+
     #themes
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
