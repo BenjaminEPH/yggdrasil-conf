@@ -38,6 +38,10 @@
       zoxide
       tmux
       grc
+      uv
+      btop
+      tree
+
     ]
     ++ [
       inputs.nvim-config.packages.x86_64-linux.default

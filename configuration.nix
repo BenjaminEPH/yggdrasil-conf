@@ -24,7 +24,7 @@
     device = "nodev";
     useOSProber = true;
   };
-  networking.hostName = "Yggdrasil"; # Define your hostname.
+  networking.hostName = "Yggdrasil";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   programs.fish.enable = true;
   # Enable networking
@@ -85,16 +85,10 @@
     ];
   };
 
-  # Install firefox.
   programs.firefox.enable = true;
-
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     neovim
     kitty
@@ -107,7 +101,7 @@
     unzip
     zellij
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-
+    prismlauncher
     # build tools
     gcc
     gnumake
@@ -153,6 +147,16 @@
     playerctl
     xdg-desktop-portal-wlr
 
+    # Shell
+    quickshell
+    dms-shell
+
+    # Music
+    spotify
+
+    # Virtual Machines
+    virtualbox
+
     #themes
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
@@ -162,7 +166,6 @@
       loginBackground = true;
     })
   ];
-
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -216,4 +219,9 @@
   ];
 
   system.stateVersion = "26.05"; # Did you read the comment?
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 }
