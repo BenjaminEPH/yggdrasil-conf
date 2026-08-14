@@ -154,6 +154,9 @@
     # Music
     spotify
 
+    # Virtual Machines
+    virtualbox
+
     #themes
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
