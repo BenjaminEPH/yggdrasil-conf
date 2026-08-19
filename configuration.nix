@@ -121,6 +121,7 @@
     lua5_1
     lua51Packages.luarocks
     lua51Packages.lua-lsp
+    php
 
     # dev tools
     pkg-config

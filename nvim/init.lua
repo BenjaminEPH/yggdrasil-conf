@@ -427,6 +427,7 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
       servers.pyright = {}
       servers.rust_analyzer = {}
       servers.bashls = {}
+      servers.phpactor = {}
       if require('nixCatsUtils').isNixCats then
         servers.nixd = {}
       else
@@ -514,6 +515,7 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
         nix = { 'nixfmt' },
         rust = { 'rustfmt' },
         go = { 'goimports', 'gofmt' },
+        php = { 'php-cs-fixer' },
       },
     },
   },

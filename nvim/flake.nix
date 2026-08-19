@@ -97,6 +97,11 @@
               nixfmt-rfc-style
               rustfmt
               go
+
+              # PHP
+              phpactor
+              php
+              phpPackages.php-cs-fixer
             ];
             kickstart-debug = [
               delve
