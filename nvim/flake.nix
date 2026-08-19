@@ -94,7 +94,7 @@
               wl-clipboard
 
               #fmts
-              nixfmt-rfc-style
+              pkgs.nixfmt
               rustfmt
               go
 
