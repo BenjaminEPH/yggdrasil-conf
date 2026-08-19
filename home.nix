@@ -41,6 +41,7 @@
       uv
       btop
       tree
+      phpPackages.composer
 
     ]
     ++ [

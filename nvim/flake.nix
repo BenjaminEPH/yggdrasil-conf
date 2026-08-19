@@ -97,6 +97,7 @@
               pkgs.nixfmt
               rustfmt
               go
+              gotools
 
               # PHP
               phpactor
