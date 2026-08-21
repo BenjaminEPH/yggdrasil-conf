@@ -36,7 +36,6 @@
       nixpkgs-fmt
       alacritty
       zoxide
-      tmux
       grc
       uv
       btop
@@ -58,5 +57,48 @@
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
+  };
+  programs.tmux = {
+    enable = true;
+    prefix = "C-a";
+    baseIndex = 1;
+    mouse = true;
+    keyMode = "vi";
+    terminal = "tmux-256color";
+    historyLimit = 10000;
+
+    plugins = with pkgs.tmuxPlugins; [
+      vim-tmux-navigator # navega entre panes de tmux y splits de nvim con Ctrl+hjkl, sin distinguir cuál es cuál
+      yank # mejora el copiado al portapapeles del sistema
+      {
+        plugin = resurrect; # guarda/restaura sesiones completas
+        extraConfig = ''
+          set -g @resurrect-capture-pane-contents 'on'
+        '';
+      }
+      {
+        plugin = continuum; # auto-guarda sesiones cada cierto tiempo, usa resurrect por debajo
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '15'
+        '';
+      }
+      {
+        plugin = catppuccin; # mismo tema que ya usas en nvim
+        extraConfig = ''
+          set -g @catppuccin_flavor "mocha"
+        '';
+      }
+    ];
+    extraConfig = ''
+      # divide paneles de forma más intuitiva
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
+      unbind '"'
+      unbind %
+
+      # recargar config con prefix + r
+      bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded!"
+    '';
   };
 }

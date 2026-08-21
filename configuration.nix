@@ -100,7 +100,10 @@
     fzf
     unzip
     zellij
+
+    # Browsers
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+
     prismlauncher
     # build tools
     gcc
@@ -122,6 +125,9 @@
     lua51Packages.luarocks
     lua51Packages.lua-lsp
     php
+    laravel
+    nodejs
+    pnpm
 
     # dev tools
     pkg-config
