@@ -9,25 +9,64 @@
   home.username = "ben";
   home.homeDirectory = "/home/ben";
   home.stateVersion = "26.05";
-  programs.fish = {
+  programs.zsh = {
     enable = true;
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/yggdrasil-conf#Yggdrasil";
     };
-    plugins = [
-      {
-        name = "tide";
-        src = pkgs.fishPlugins.tide.src;
-      }
-      {
-        name = "autopair";
-        src = pkgs.fishPlugins.autopair.src;
-      }
-      {
-        name = "grc";
-        src = pkgs.fishPlugins.grc.src;
-      }
-    ];
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    enableCompletion = true;
+    historySubstringSearch.enable = true;
+
+    history = {
+      size = 10000;
+      save = 10000;
+      ignoreDups = true;
+      ignoreSpace = true;
+      share = true;
+    };
+
+    initContent = ''
+      if command -v grc &> /dev/null; then
+        source ${pkgs.grc}/etc/grc.zsh
+      fi
+      setopt AUTO_CD
+      setopt CORRECT
+    '';
+  };
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      add_newline = true;
+      format = "$directory$git_branch$git_status$nix_shell$character";
+
+      character = {
+        success_symbol = "[➜](bold #9ece6a)"; # verde
+        error_symbol = "[➜](bold #f7768e)"; # rojo
+      };
+
+      directory = {
+        truncation_length = 3;
+        style = "bold #7aa2f7"; # azul
+      };
+
+      git_branch = {
+        symbol = " ";
+        style = "bold #bb9af7"; # púrpura
+      };
+
+      git_status = {
+        style = "bold #e0af68"; # amarillo
+      };
+
+      nix_shell = {
+        symbol = "❄️ ";
+        style = "bold #7dcfff"; # cyan
+        format = "via [$symbol$state]($style) ";
+      };
+    };
   };
   home.packages =
     with pkgs;
@@ -56,7 +95,7 @@
   };
   programs.zoxide = {
     enable = true;
-    enableFishIntegration = true;
+    enableZshIntegration = true;
   };
   programs.tmux = {
     enable = true;

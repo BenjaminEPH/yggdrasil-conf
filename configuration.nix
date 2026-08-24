@@ -26,7 +26,7 @@
   };
   networking.hostName = "Yggdrasil";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  programs.fish.enable = true;
+  programs.zsh.enable = true;
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -75,7 +75,7 @@
   users.users."ben" = {
     isNormalUser = true;
     description = "ben";
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
