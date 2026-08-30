@@ -38,15 +38,15 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = false;
+  services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
+  # Enable the XFCE  Desktop Environment.
+  services.xserver.desktopManager.xfce.enable = true;
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
+    wayland.enable = false;
     theme = "catppuccin-mocha-mauve";
   };
-  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -136,9 +136,6 @@
     # Misc
     tree-sitter
 
-    # Fonts
-    nerd-fonts.jetbrains-mono
-
     # Wallpapers
     linux-wallpaperengine
 
@@ -153,6 +150,7 @@
     brightnessctl
     playerctl
     xdg-desktop-portal-wlr
+    xclip
 
     # Shell
     quickshell
@@ -178,12 +176,14 @@
     wrapperFeatures.gtk = true;
     extraOptions = [ "--unsupported-gpu" ];
   };
-
-  fonts.fontconfig.defaultFonts = {
-    monospace = [ "JetBrainsMono Nerd Font" ];
-    sansSerif = [ "JetBrainsMono Nerd Font" ];
-    serif = [ "JetBrainsMono Nerd Font" ];
-  };
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
+  #fonts.fontconfig.defaultFonts = {
+  #monospace = [ "JetBrainsMono Nerd Font" ];
+  #sansSerif = [ "JetBrainsMono Nerd Font" ];
+  #serif = [ "JetBrainsMono Nerd Font" ];
+  #};
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;

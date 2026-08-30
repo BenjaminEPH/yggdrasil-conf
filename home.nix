@@ -81,6 +81,12 @@
       tree
       phpPackages.composer
 
+      # XFCE Theming
+      qogir-theme
+      qogir-icon-theme
+      xfce4-whiskermenu-plugin
+      conky
+
     ]
     ++ [
       inputs.nvim-config.packages.x86_64-linux.default
