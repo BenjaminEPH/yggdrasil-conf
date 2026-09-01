@@ -105,7 +105,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Bufferline
 vim.keymap.set('n', '<S-l>', '<cmd>BufferLineCycleNext<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<S-h>', '<cmd>BufferLineCycleNext<CR>', { desc = 'Prev buffer' })
+vim.keymap.set('n', '<S-h>', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Prev buffer' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -427,6 +427,7 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
       servers.pyright = {}
       servers.rust_analyzer = {}
       servers.bashls = {}
+      servers.phpactor = {}
       if require('nixCatsUtils').isNixCats then
         servers.nixd = {}
       else
@@ -514,6 +515,7 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
         nix = { 'nixfmt' },
         rust = { 'rustfmt' },
         go = { 'goimports', 'gofmt' },
+        php = { 'php_cs_fixer' },
       },
     },
   },

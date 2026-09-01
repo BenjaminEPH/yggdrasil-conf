@@ -26,7 +26,7 @@
   };
   networking.hostName = "Yggdrasil";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  programs.fish.enable = true;
+  programs.zsh.enable = true;
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -38,15 +38,15 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = false;
+  services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
+  # Enable the XFCE  Desktop Environment.
+  services.xserver.desktopManager.xfce.enable = true;
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
+    wayland.enable = false;
     theme = "catppuccin-mocha-mauve";
   };
-  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -75,7 +75,7 @@
   users.users."ben" = {
     isNormalUser = true;
     description = "ben";
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -100,6 +100,8 @@
     fzf
     unzip
     zellij
+
+    # Browsers
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     prismlauncher
     # build tools
@@ -121,6 +123,10 @@
     lua5_1
     lua51Packages.luarocks
     lua51Packages.lua-lsp
+    php
+    laravel
+    nodejs
+    pnpm
 
     # dev tools
     pkg-config
@@ -128,9 +134,6 @@
 
     # Misc
     tree-sitter
-
-    # Fonts
-    nerd-fonts.jetbrains-mono
 
     # Wallpapers
     linux-wallpaperengine
@@ -146,6 +149,20 @@
     brightnessctl
     playerctl
     xdg-desktop-portal-wlr
+    xclip
+
+    # Shell
+    quickshell
+    dms-shell
+
+    # Music
+    spotify
+
+    # Virtual Machines
+    virtualbox
+
+    fd
+    ripgrep
 
     # Shell
     quickshell
@@ -171,12 +188,14 @@
     wrapperFeatures.gtk = true;
     extraOptions = [ "--unsupported-gpu" ];
   };
-
-  fonts.fontconfig.defaultFonts = {
-    monospace = [ "JetBrainsMono Nerd Font" ];
-    sansSerif = [ "JetBrainsMono Nerd Font" ];
-    serif = [ "JetBrainsMono Nerd Font" ];
-  };
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
+  #fonts.fontconfig.defaultFonts = {
+  #monospace = [ "JetBrainsMono Nerd Font" ];
+  #sansSerif = [ "JetBrainsMono Nerd Font" ];
+  #serif = [ "JetBrainsMono Nerd Font" ];
+  #};
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;

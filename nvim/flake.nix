@@ -94,9 +94,15 @@
               wl-clipboard
 
               #fmts
-              nixfmt-rfc-style
+              pkgs.nixfmt
               rustfmt
               go
+              gotools
+
+              # PHP
+              phpactor
+              php
+              phpPackages.php-cs-fixer
             ];
             kickstart-debug = [
               delve
