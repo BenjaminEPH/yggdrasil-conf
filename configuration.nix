@@ -162,6 +162,9 @@
     # Virtual Machines
     virtualbox
 
+    fd
+    ripgrep
+
     #themes
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
