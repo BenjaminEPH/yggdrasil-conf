@@ -103,7 +103,6 @@
 
     # Browsers
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-
     prismlauncher
     # build tools
     gcc
@@ -164,6 +163,16 @@
 
     fd
     ripgrep
+
+    # Shell
+    quickshell
+    dms-shell
+
+    # Music
+    spotify
+
+    # Virtual Machines
+    virtualbox
 
     #themes
     (pkgs.catppuccin-sddm.override {
