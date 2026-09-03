@@ -85,7 +85,6 @@
     ];
   };
 
-  programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     vim
@@ -191,11 +190,7 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
-  #fonts.fontconfig.defaultFonts = {
-  #monospace = [ "JetBrainsMono Nerd Font" ];
-  #sansSerif = [ "JetBrainsMono Nerd Font" ];
-  #serif = [ "JetBrainsMono Nerd Font" ];
-  #};
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;

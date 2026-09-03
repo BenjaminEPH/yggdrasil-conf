@@ -87,6 +87,10 @@
       xfce4-whiskermenu-plugin
       conky
 
+      # Editors
+      zed-editor
+      helix
+
     ]
     ++ [
       inputs.nvim-config.packages.x86_64-linux.default
