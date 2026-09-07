@@ -38,32 +38,33 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+
     settings = {
       add_newline = true;
       format = "$directory$git_branch$git_status$nix_shell$character";
 
       character = {
-        success_symbol = "[➜](bold #9ece6a)"; # verde
-        error_symbol = "[➜](bold #f7768e)"; # rojo
+        success_symbol = "[➜](bold #e8e7e3)";
+        error_symbol = "[➜](bold #e67e80)";
       };
 
       directory = {
         truncation_length = 3;
-        style = "bold #7aa2f7"; # azul
+        style = "bold #7fbbb3";
       };
 
       git_branch = {
         symbol = " ";
-        style = "bold #bb9af7"; # púrpura
+        style = "bold #d699b6";
       };
 
       git_status = {
-        style = "bold #e0af68"; # amarillo
+        style = "bold #dbbc7f";
       };
 
       nix_shell = {
         symbol = "❄️ ";
-        style = "bold #7dcfff"; # cyan
+        style = "bold #83c092";
         format = "via [$symbol$state]($style) ";
       };
     };
@@ -91,6 +92,9 @@
       zed-editor
       helix
 
+      # misc
+      dmidecode
+
     ]
     ++ [
       inputs.nvim-config.packages.x86_64-linux.default
@@ -117,36 +121,76 @@
     historyLimit = 10000;
 
     plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator # navega entre panes de tmux y splits de nvim con Ctrl+hjkl, sin distinguir cuál es cuál
-      yank # mejora el copiado al portapapeles del sistema
+      vim-tmux-navigator
+      yank
+
       {
-        plugin = resurrect; # guarda/restaura sesiones completas
+        plugin = resurrect;
         extraConfig = ''
           set -g @resurrect-capture-pane-contents 'on'
         '';
       }
+
       {
-        plugin = continuum; # auto-guarda sesiones cada cierto tiempo, usa resurrect por debajo
+        plugin = continuum;
         extraConfig = ''
           set -g @continuum-restore 'on'
           set -g @continuum-save-interval '15'
         '';
       }
-      {
-        plugin = catppuccin; # mismo tema que ya usas en nvim
-        extraConfig = ''
-          set -g @catppuccin_flavor "mocha"
-        '';
-      }
     ];
+
     extraConfig = ''
-      # divide paneles de forma más intuitiva
+      # ─────────────────────────────────────────
+      # Apariencia
+      # ─────────────────────────────────────────
+
+      set -g status-style "bg=#1f2335,fg=#a9b1d6"
+
+      # Ventana activa: amarillo como acento
+      set -g window-status-current-style "fg=#e0af68,bold"
+      set -g window-status-current-format " #I:#W "
+
+      # Ventanas inactivas
+      set -g window-status-style "fg=#565f89"
+      set -g window-status-format " #I:#W "
+
+      # Barra izquierda
+      set -g status-left "#[fg=#e0af68,bold] #S #[fg=#565f89]│ "
+
+      # Barra derecha
+      set -g status-right "#[fg=#7dcfff]%H:%M #[fg=#565f89]│ #[fg=#e0af68]%d-%m "
+
+      set -g status-left-length 30
+      set -g status-right-length 50
+
+      # ─────────────────────────────────────────
+      # Paneles
+      # ─────────────────────────────────────────
+
+      set -g pane-border-style "fg=#3b4261"
+      set -g pane-active-border-style "fg=#e0af68"
+
+      # ─────────────────────────────────────────
+      # Selección
+      # ─────────────────────────────────────────
+
+      set -g mode-style "bg=#e0af68,fg=#1f2335,bold"
+
+      # ─────────────────────────────────────────
+      # División de paneles
+      # ─────────────────────────────────────────
+
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
+
       unbind '"'
       unbind %
 
-      # recargar config con prefix + r
+      # ─────────────────────────────────────────
+      # Recargar configuración
+      # ─────────────────────────────────────────
+
       bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded!"
     '';
   };

@@ -139,6 +139,8 @@
               mini-nvim
               nvim-treesitter.withAllGrammars
               bufferline-nvim
+
+              koda-nvim
               # This is for if you only want some of the grammars
               # (nvim-treesitter.withPlugins (
               #   plugins: with plugins; [

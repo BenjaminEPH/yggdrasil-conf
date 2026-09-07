@@ -42,6 +42,7 @@
 
   # Enable the XFCE  Desktop Environment.
   services.xserver.desktopManager.xfce.enable = true;
+  services.xserver.windowManager.i3.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = false;
@@ -148,7 +149,6 @@
     brightnessctl
     playerctl
     xdg-desktop-portal-wlr
-    xclip
 
     # Shell
     quickshell
@@ -172,6 +172,12 @@
 
     # Virtual Machines
     virtualbox
+
+    #i3
+    i3status
+    i3lock
+    xclip
+    xfce.xfce4-clipman-plugin
 
     #themes
     (pkgs.catppuccin-sddm.override {
