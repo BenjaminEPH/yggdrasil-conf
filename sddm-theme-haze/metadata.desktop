@@ -1,0 +1,15 @@
+[SddmGreeterTheme]
+Name=hazae
+Description=A monochromatic and minimalistic theme for Sddm
+Author=Ben
+Copyright=2026
+License=GPLv3
+Type=sddm-theme
+Version=1.0
+Website=
+Screenshot=screenshot.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Fonts=fonts
+QtVersion=6

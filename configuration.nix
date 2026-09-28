@@ -9,6 +9,9 @@
   ...
 }:
 
+let
+  haze-theme = pkgs.callPackage ./sddm-haze.nix { };
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -45,9 +48,15 @@
   services.xserver.windowManager.i3.enable = true;
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = false;
-    theme = "catppuccin-mocha-mauve";
+    wayland.enable = true;
+    theme = "haze";
+    #theme = "catppuccin-mocha-mauve";
   };
+
+  # TEMPORAL: capturar stderr/stdout del greeter para depurar el tema haze
+  systemd.services.display-manager.serviceConfig.StandardOutput =
+    "append:/tmp/sddm-greeter-debug.log";
+  systemd.services.display-manager.serviceConfig.StandardError = "append:/tmp/sddm-greeter-debug.log";
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -120,6 +129,9 @@
     clippy
     rust-analyzer
     go
+    gopls
+    nil
+    pyright
     lua5_1
     lua51Packages.luarocks
     lua51Packages.lua-lsp
@@ -153,6 +165,8 @@
     # Shell
     quickshell
     dms-shell
+    nerd-fonts.symbols-only
+    symbola
 
     # Music
     spotify
@@ -177,7 +191,13 @@
     i3status
     i3lock
     xclip
-    xfce.xfce4-clipman-plugin
+    xfce4-clipman-plugin
+
+    # FMTS
+    nixfmt
+
+    # OWN theme
+    haze-theme
 
     #themes
     (pkgs.catppuccin-sddm.override {
