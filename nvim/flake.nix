@@ -70,6 +70,18 @@
           mkPlugin,
           ...
         }@packageDef:
+        let
+          tailwindcss-colorizer-cmp = pkgs.vimUtils.buildVimPlugin {
+            pname = "tailwindcss-colorizer-cmp.nvim";
+            version = "unstable";
+            src = pkgs.fetchFromGitHub {
+              owner = "roobert";
+              repo = "tailwindcss-colorizer-cmp.nvim";
+              rev = "main";
+              sha256 = "sha256-PIkfJzLt001TojAnE/rdRhgVEwSvCvUJm/vNPLSWjpY=";
+            };
+          };
+        in
         {
           # lspsAndRuntimeDeps:
           # this section is for dependencies that should be available
@@ -103,6 +115,12 @@
               phpactor
               php
               phpPackages.php-cs-fixer
+
+              #TS Tailwindcss
+              typescript-language-server
+              tailwindcss-language-server
+              prettier
+
             ];
             kickstart-debug = [
               delve
@@ -139,6 +157,8 @@
               mini-nvim
               nvim-treesitter.withAllGrammars
               bufferline-nvim
+
+              #tailwindcss-colorizer-cmp
 
               koda-nvim
               # This is for if you only want some of the grammars

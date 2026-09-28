@@ -428,6 +428,8 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
       servers.rust_analyzer = {}
       servers.bashls = {}
       servers.phpactor = {}
+      servers.ts_ls = {}
+      servers.tailwindcss = {}
       if require('nixCatsUtils').isNixCats then
         servers.nixd = {}
       else
@@ -516,6 +518,10 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
         rust = { 'rustfmt' },
         go = { 'goimports', 'gofmt' },
         php = { 'php_cs_fixer' },
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        css = { 'prettier' },
       },
     },
   },
@@ -559,6 +565,9 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
           end,
         },
         completion = { completeopt = 'menu,menuone,noinsert' },
+        -- formatting = {
+        --    format = require('tailwindcss-colorizer-cmp').formatter,
+        -- },
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
           ['<C-n>'] = cmp.mapping.select_next_item(),

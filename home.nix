@@ -9,6 +9,10 @@
   home.username = "ben";
   home.homeDirectory = "/home/ben";
   home.stateVersion = "26.05";
+  home.sessionPath = [
+    "$HOME/.config/emacs/bin"
+  ];
+
   programs.zsh = {
     enable = true;
     shellAliases = {
@@ -91,9 +95,20 @@
       # Editors
       zed-editor
       helix
+      emacs
 
       # misc
       dmidecode
+
+      obsidian
+      localsend
+
+      zig
+      zls
+
+      qt6.qtdeclarative
+      imagemagick
+      gimp
 
     ]
     ++ [
@@ -106,6 +121,12 @@
       user.email = "benjamin.ely07@gmail.com";
       init.defaultBranch = "main";
     };
+  };
+  services.emacs = {
+    enable = true;
+    client.enable = true;
+    defaultEditor = true;
+    startWithUserSession = true;
   };
   programs.zoxide = {
     enable = true;
