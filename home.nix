@@ -101,7 +101,6 @@
       dmidecode
 
       obsidian
-      localsend
 
       zig
       zls

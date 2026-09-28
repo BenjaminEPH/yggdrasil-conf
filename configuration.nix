@@ -213,6 +213,14 @@ in
     wrapperFeatures.gtk = true;
     extraOptions = [ "--unsupported-gpu" ];
   };
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+  networking.firewall = {
+    allowedTCPPorts = [ 57621 ];
+    allowedUDPPorts = [ 5353 ];
+  };
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
