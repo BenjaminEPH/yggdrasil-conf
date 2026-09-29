@@ -17,6 +17,8 @@
     enable = true;
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/yggdrasil-conf#Yggdrasil";
+      ls = "ls --color=auto";
+      ll = "ls -lah --color=auto";
     };
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
@@ -45,33 +47,68 @@
 
     settings = {
       add_newline = true;
-      format = "$directory$git_branch$git_status$nix_shell$character";
+
+      format = builtins.concatStringsSep "" [
+        "$directory"
+        "$git_branch"
+        "$git_status"
+        "$nix_shell"
+        "$cmd_duration"
+        "$line_break"
+        "$character"
+      ];
 
       character = {
-        success_symbol = "[➜](bold #e8e7e3)";
-        error_symbol = "[➜](bold #e67e80)";
+        success_symbol = "[❯](bold green)";
+        error_symbol = "[❯](bold red)";
       };
 
       directory = {
+        style = "bold blue";
         truncation_length = 3;
-        style = "bold #7fbbb3";
+        truncation_symbol = "…/";
+        read_only = " 󰌾";
+        read_only_style = "red";
+        format = "[$path]($style)[$read_only]($read_only_style) ";
       };
 
       git_branch = {
         symbol = " ";
-        style = "bold #d699b6";
+        style = "bold purple";
+        format = "[$symbol$branch]($style) ";
       };
 
       git_status = {
-        style = "bold #dbbc7f";
+        style = "bold yellow";
+        format = "([$all_status$ahead_behind]($style) )";
+        ahead = "⇡\${count}";
+        behind = "⇣\${count}";
+        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
+        modified = "!";
+        staged = "+";
+        untracked = "?";
+        deleted = "✘";
+        stashed = "≡";
       };
 
       nix_shell = {
-        symbol = "❄️ ";
-        style = "bold #83c092";
+        symbol = " ";
+        style = "bold cyan";
         format = "via [$symbol$state]($style) ";
       };
+
+      cmd_duration = {
+        min_time = 2000;
+        style = "bright-black";
+        format = "took [$duration]($style) ";
+      };
     };
+  };
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true; # define los aliases ls, ll, la, lt...
+    icons = "auto";
+    git = true; # muestra el estado de git por archivo
   };
   home.packages =
     with pkgs;

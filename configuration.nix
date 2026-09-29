@@ -199,6 +199,16 @@ in
     # OWN theme
     haze-theme
 
+    pkg-config
+    glib
+    gtk3
+    webkitgtk_4_1
+    librsvg
+    cairo
+    pango
+    gdk-pixbuf
+    ghostty
+
     #themes
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
@@ -207,6 +217,15 @@ in
       fontSize = "12";
       loginBackground = true;
     })
+  ];
+  environment.variables.PKG_CONFIG_PATH = pkgs.lib.makeSearchPathOutput "dev" "lib/pkgconfig" [
+    pkgs.glib
+    pkgs.gtk3
+    pkgs.webkitgtk_4_1
+    pkgs.librsvg
+    pkgs.cairo
+    pkgs.pango
+    pkgs.gdk-pixbuf
   ];
   programs.sway = {
     enable = true;
